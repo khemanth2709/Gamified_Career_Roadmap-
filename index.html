@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSprint - Gamified Career Roadmap</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-rocket"></i> SkillSprint</h1>
+                    <p class="tagline">Gamified Career Roadmap for Students & Freshers</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <i class="fas fa-redo"></i> Reset Progress
+                    </button>
+                    <div class="theme-toggle">
+                        <input type="checkbox" id="themeSwitch" class="theme-switch">
+                        <label for="themeSwitch" class="theme-label">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                            <span class="theme-ball"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard Overview -->
+        <section class="dashboard" id="dashboard">
+            <div class="dashboard-grid">
+                <!-- Current Career -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-briefcase"></i> Current Career</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="career-info" id="currentCareer">
+                            <div class="career-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="career-details">
+                                <h4>Select a Career</h4>
+                                <p class="text-muted">Choose a path to begin your journey</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overall Progress -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Overall Progress</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-display">
+                            <div class="progress-circle" id="progressCircle">
+                                <svg width="100" height="100" viewBox="0 0 100 100">
+                                    <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                                    <circle class="progress-bar" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="283"></circle>
+                                </svg>
+                                <div class="progress-text">
+                                    <span id="progressPercent">0%</span>
+                                </div>
+                            </div>
+                            <div class="progress-stats">
+                                <p><span id="completedSkills">0</span> of <span id="totalSkills">0</span> skills</p>
+                                <p class="text-muted">Skills completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Level -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-trophy"></i> Current Level</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="level-display">
+                            <div class="level-badge" id="currentLevelBadge">
+                                <span class="level-number">1</span>
+                                <span class="level-title">Beginner</span>
+                            </div>
+                            <div class="level-progress">
+                                <div class="xp-info">
+                                    <span><span id="currentXP">0</span> XP</span>
+                                    <span><span id="nextLevelXP">100</span> XP for next level</span>
+                                </div>
+                                <div class="xp-bar">
+                                    <div class="xp-fill" id="xpFill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streak Tracker -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-fire"></i> Daily Streak</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="streak-display">
+                            <div class="streak-counter">
+                                <div class="flame-icon">
+                                    <i class="fas fa-fire"></i>
+                                    <span class="flame-count" id="currentStreak">0</span>
+                                </div>
+                                <div class="streak-info">
+                                    <p>🔥 <span id="streakDays">0-day</span> streak</p>
+                                    <p class="text-muted">Longest: <span id="longestStreak">0</span> days</p>
+                                </div>
+                            </div>
+                            <div class="streak-reminder">
+                                <p><i class="fas fa-clock"></i> Update a skill today to keep your streak!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Selection -->
+        <section class="career-selection" id="careerSelection">
+            <div class="section-header">
+                <h2><i class="fas fa-map-signs"></i> Choose Your Career Path</h2>
+                <p>Select a role to see the complete skill roadmap</p>
+            </div>
+            <div class="career-grid" id="careerGrid">
+                <!-- Careers will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Skill Roadmap -->
+        <section class="skill-roadmap" id="skillRoadmap" style="display: none;">
+            <div class="roadmap-header">
+                <h2 id="roadmapTitle"><i class="fas fa-road"></i> Skill Roadmap</h2>
+                <button class="btn btn-secondary" id="backToSelection">
+                    <i class="fas fa-arrow-left"></i> Choose Different Path
+                </button>
+            </div>
+            
+            <div class="roadmap-content" id="roadmapContent">
+                <!-- Roadmap sections will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Badges & Achievements -->
+        <section class="badges-section">
+            <div class="section-header">
+                <h2><i class="fas fa-award"></i> Badges & Achievements</h2>
+                <p>Unlock badges by completing milestones</p>
+            </div>
+            <div class="badges-grid" id="badgesGrid">
+                <!-- Badges will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Notes Modal -->
+        <div class="modal" id="notesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-sticky-note"></i> Skill Notes</h3>
+                    <button class="close-modal" id="closeNotesModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="noteSkillTitle" class="note-skill-title" readonly>
+                    <textarea id="noteContent" placeholder="Add your notes, resources, or learning tips for this skill..."></textarea>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" id="clearNote">Clear</button>
+                        <button class="btn btn-primary" id="saveNote">Save Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-rocket"></i> SkillSprint</h3>
+                    <p>Transform your career planning into an engaging journey with gamification and progress tracking.</p>
+                </div>
+                <div class="footer-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span>Built for Students & Freshers</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-database"></i>
+                        <span>100% Offline • localStorage</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-code"></i>
+                        <span>Pure HTML/CSS/JS • No Frameworks</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 SkillSprint | Career Planning Gamified</p>
+                <p class="defense-text">"SkillSprint converts career planning into a visual, gamified roadmap using only frontend technologies."</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/roadmaps.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/gamify.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
